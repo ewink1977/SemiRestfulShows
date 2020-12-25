@@ -12,8 +12,13 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <div class="content">
-        {% content block %}
+    <div class="container rounded-lg shadow bg-gradient-light text-dark">
+        <div class="row mt-5 mr-2 align-items-end justify-content-end">
+            <div class="col-2 align-self-end">
+                <h6 class="text-right"><a href="#">Go Back</a></h6>
+            </div>
+        </div>
+        {% block content %}
         {% endblock content %}
     </div>
     <!-- Optional JavaScript -->
