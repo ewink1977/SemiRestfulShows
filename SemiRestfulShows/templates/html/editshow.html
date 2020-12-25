@@ -2,20 +2,20 @@
 {% block content %}
 <div class="row align-items-start justify-content-start mb-2">
     <div class="col align-self-start">
-        <h1>Add a New Show</h1>
+        <h1>Edit {{ showinformation.title }}</h1>
     </div>
 </div>
-<form action="{% url 'newshow' %}" method="POST" >
+<form action="{% url 'edit_show' %}" method="POST">
     {% csrf_token %}
     <div class="form-group">
         <label for="showtitle">Title</label>
-        <input class="form-control" type="text" name="showtitle" id="showtitle" placeholder="Show Title">
+        <input class="form-control" type="text" name="showtitle" id="showtitle" placeholder="{{ showinformation.title }}">
     </div>
     <div class="row">
         <div class="col">
             <div class="form-group">
                 <label for="shownet">Network</label>
-                <input class="form-control" type="text" name="shownet" id="shownet" placeholder="(e.g.) NBC, CBS">
+                <input class="form-control" type="text" name="shownet" id="shownet" placeholder="{{ showinformation.network }}">
             </div>
         </div>
         <div class="col">
@@ -27,10 +27,13 @@
     </div>
     <div class="form-group">
         <label for="showdesc">Description</label>
-        <textarea class="form-control" name="showdesc" id="showdesc" rows="5"></textarea>
+        <textarea class="form-control" name="showdesc" id="showdesc" rows="5" placeholder="{{ showinformation.description }}"></textarea>
     </div>
     <div class="text-center">
-        <button type="submit" class="btn btn-primary mb-3">Create</button>
+        <button type="submit" class="btn btn-primary mb-3">Edit</button>
     </div>
 </form>
+<div class="text-center">
+    <a href="{% url 'display_show' showinformation.id %}">Go To Show</a>
+</div>
 {% endblock %}

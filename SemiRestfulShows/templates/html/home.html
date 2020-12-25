@@ -24,7 +24,7 @@
                 <td>{{ show.title }}</td>
                 <td>{{ show.network }}</td>
                 <td>{{ show.release_date|date:"F d, Y"}}</td>
-                <td><a href="{% url 'shows:display_show' show.id %}">Show</a> | <a href="">Edit</a> | <a href="">Delete</a></td>
+                <td><a href="{% url 'display_show' show.id %}">Show</a> | <a href="">Edit</a> | <a href="">Delete</a></td>
                 {% endfor %}
             </tbody>
         </table>
@@ -32,7 +32,7 @@
 </div>
 <div class="row align-items-start justify-content-start mb-2">
     <div class="col align-self-start">
-        <h3><a href="{% url 'shows:newshow' %}">Add A New Show</a></h3>
+        <h3><a href="{% url 'newshow' %}">Add A New Show</a></h3>
     </div>
 </div>
 {% endblock %}
