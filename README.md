@@ -1,8 +1,8 @@
 <h1>SEMI RESTFUL TV SHOWS - ASSIGNMENT</h1>
 
-Objectives:
+<h2>Objectives:</h2>
 
->> Practice ORM queries from the controller
->> Practice RESTful routing
->> Practice rendering query results to templates
->> Practice using form input to create table data
+<li> Practice ORM queries from the controller</li>
+<li> Practice RESTful routing</li>
+<li> Practice rendering query results to templates</li>
+<li> Practice using form input to create table data</li>
