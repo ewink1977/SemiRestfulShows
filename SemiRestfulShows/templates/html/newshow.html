@@ -6,6 +6,7 @@
     </div>
 </div>
 <form>
+    {% csrf_token %}
     <div class="form-group">
         <label for="showtitle">Title</label>
         <input class="form-control" type="text" name="showtitle" id="showtitle" placeholder="Show Title">

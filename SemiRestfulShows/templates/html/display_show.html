@@ -1,0 +1,38 @@
+{% extends "html/base.html" %}
+{% block content %}
+<div class="row align-items-start justify-content-start mb-2">
+    <div class="col align-self-start">
+        <h1>{{ showinformation.name }}</h1>
+    </div>
+</div>
+<div class="row align-items-start justify-content-start mb-2">
+    <div class="col align-self-start">
+        <p class="font-weight-bold">Title : {{ showinformation.title }}</p>
+    </div>
+</div>
+<div class="row align-items-start justify-content-start mb-2">
+    <div class="col align-self-start">
+        <p class="font-weight-bold">Network : {{ showinformation.network }}</p>
+    </div>
+</div>
+<div class="row align-items-start justify-content-start mb-2">
+    <div class="col align-self-start">
+        <p class="font-weight-bold">Release Date : {{ showinformation.release_date }}</p>
+    </div>
+</div>
+<div class="row align-items-start justify-content-start mb-2">
+    <div class="col align-self-start">
+        <p class="font-weight-bold">Description : {{ showinformation.description }}</p>
+    </div>
+</div>
+<div class="row align-items-start justify-content-start mt-5">
+    <div class="col align-self-start">
+        <p class="font-weight-bold">Last Updated : {{ showinformation.updated_at|date:"" }}</p>
+    </div>
+</div>
+<div class="row align-items-start justify-content-start mb-2">
+    <div class="col align-self-start">
+        <p class="font-weight-bold"><a href="">Edit</a> | <a href="">Delete</a></p>
+    </div>
+</div>
+{% endblock %}
