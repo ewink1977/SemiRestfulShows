@@ -8,5 +8,5 @@ class Shows(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def __repr__(self):
-        return f" ID: {self.id} Title: {self.title} Description: {self.desc}"
+    # def __repr__(self):
+        # return f" ID: {self.id} Title: {self.title}"

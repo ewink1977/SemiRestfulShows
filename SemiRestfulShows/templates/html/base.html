@@ -18,6 +18,15 @@
                 <h6 class="text-right"><a href="{% url 'home' %}">Go Back</a></h6>
             </div>
         </div>
+        <div class="row align-items-start justify-content-start mb-2">
+            <div class="col align-self-start">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
         {% block content %}
         {% endblock content %}
     </div>

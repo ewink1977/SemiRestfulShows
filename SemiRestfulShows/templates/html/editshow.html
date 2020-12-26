@@ -5,7 +5,7 @@
         <h1>Edit {{ showinformation.title }}</h1>
     </div>
 </div>
-<form action="{% url 'edit_show' %}" method="POST">
+<form action="{% url 'editshow' showinformation.id %}" method="POST">
     {% csrf_token %}
     <div class="form-group">
         <label for="showtitle">Title</label>
@@ -30,7 +30,7 @@
         <textarea class="form-control" name="showdesc" id="showdesc" rows="5" placeholder="{{ showinformation.description }}"></textarea>
     </div>
     <div class="text-center">
-        <button type="submit" class="btn btn-primary mb-3">Edit</button>
+        <button type="submit" class="btn btn-primary mb-3">Update</button>
     </div>
 </form>
 <div class="text-center">
