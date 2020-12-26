@@ -56,3 +56,17 @@ def updateshow(request, showid):
         return redirect('display_show', update.id)
     if request.method == 'GET':
         return redirect('showlist')
+
+def destroy(request, showid):
+    if request.method == 'GET':
+        showinfo = Shows.objects.get(id=showid)
+        context = {
+            "showinformation" : showinfo,
+            "pagetitle" : f"Delete { showinfo.title }"
+        }
+        return render(request, 'html/confirm_delete.html', context)
+    if request.method == 'POST':
+        byebye = Shows.objects.get(id=showid)
+        byebye.delete()
+        messages.success(request, f"{ byebye.title } deleted successfully from database.")
+        return redirect('showlist')
