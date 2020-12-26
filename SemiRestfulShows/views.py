@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Shows
 
+
+
 def newshow(request):
     if request.method == 'GET':
         context = {
@@ -9,10 +11,10 @@ def newshow(request):
         }
         return render(request, 'html/newshow.html', context)
     if request.method == 'POST':
-        errors = Shows.objects.basic_validator(request.POST)
+        errors = Shows.objects.basicvalidator(request.POST)
         if len(errors) > 0:
             for key, value in errors.items():
-                messages.error(request, value)
+                messages.error(request, value, extra_tags='danger')
             return redirect('newshow')
         else:
             Shows.objects.create(title=request.POST['showtitle'], network=request.POST['shownet'], release_date=request.POST['showreldate'], description=request.POST['showdesc'])
@@ -49,6 +51,11 @@ def editshow(request, showid):
 def updateshow(request, showid):
     if request.method == 'POST':
         update = Shows.objects.get(id=showid)
+        errors = Shows.objects.basicvalidator(request.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value, extra_tags='danger')
+            return redirect('display_show', update.id)    
         if request.POST['showtitle']:
             update.title = request.POST['showtitle']
         if request.POST['shownet']:

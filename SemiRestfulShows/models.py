@@ -1,18 +1,32 @@
 from django.db import models
-from datetime import date
+from datetime import date, datetime
 
-class Show_Validation(models.Manager):
-    def basic_validator(self, postData):
+class ShowValidation(models.Manager):
+    def basicvalidator(self, postData):
+        # Since the edit page allows blank entries, we need to verify each entry has data before
+        # we run the validation statements, otherwise we'd have to write a different, mostly duplicate
+        # validation function for both the ADD SHOW and EDIT SHOW pages.
         errors = {}
-        if len(postData['title']) < 2:
-            errors['title'] = "Show title must be at least 2 characters long."
-        if len(postData['network']) < 3:
-            errors['network'] = "Network name must be at least 3 characters (for 2 character network, add 'The' - e.g. 'The WB')."
-        if postData['release_date'] >= date.today():
-            errors['release_date'] = "The release date must be in the past."
-        if postData['description']:
-            if len(postData['description']) < 10:
-                errors['description'] = "Descriptions must be at least 10 characters."
+        if postData['showtitle']:
+            dupcheck = Shows.objects.all()
+            if len(postData['showtitle']) < 2:
+                errors['showtitle'] = "Show title must be at least 2 characters long."
+            for check in dupcheck:
+                if postData['showtitle'] == check.title:
+                    errors['showtitle'] = "Show title must be unique."
+        if postData['shownet']:
+            if len(postData['shownet']) < 3:
+                errors['shownet'] = "Network name must be at least 3 characters (for 2 character network, add 'The' - e.g. 'The WB')."
+        if postData['showreldate']:
+            # Magic to make the date comparison work.
+            dateentered = postData['showreldate']
+            reldate = datetime.strptime(dateentered, "%Y-%m-%d")
+            today = datetime.now()
+            if reldate >= today:
+                errors['showreldate'] = "The release date must be in the past."
+        if postData['showdesc']:
+            if len(postData['showdesc']) < 10:
+                errors['showdesc'] = "Descriptions must be at least 10 characters."
         return errors
 
 class Shows(models.Model):
@@ -22,4 +36,5 @@ class Shows(models.Model):
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    objects = Show_Validation()
+
+    objects = ShowValidation()
