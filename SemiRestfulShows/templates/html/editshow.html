@@ -5,7 +5,7 @@
         <h1>Edit {{ showinformation.title }}</h1>
     </div>
 </div>
-<form action="{% url 'editshow' showinformation.id %}" method="POST">
+<form action="{% url 'updateshow' showinformation.id %}" method="POST">
     {% csrf_token %}
     <div class="form-group">
         <label for="showtitle">Title</label>

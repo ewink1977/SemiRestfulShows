@@ -39,6 +39,8 @@ def editshow(request, showid):
             "pagetitle" : f"Edit { showdisplay.title }",
         }
         return render(request, 'html/editshow.html', context)
+
+def updateshow(request, showid):
     if request.method == 'POST':
         update = Shows.objects.get(id=showid)
         if request.POST['showtitle']:
@@ -52,3 +54,5 @@ def editshow(request, showid):
         update.save()
         messages.success(request, f"{ update.title } edited successfully!")
         return redirect('display_show', update.id)
+    if request.method == 'GET':
+        return redirect('showlist')
