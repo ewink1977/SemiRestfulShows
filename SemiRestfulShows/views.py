@@ -9,9 +9,15 @@ def newshow(request):
         }
         return render(request, 'html/newshow.html', context)
     if request.method == 'POST':
-        Shows.objects.create(title=request.POST['showtitle'], network=request.POST['shownet'], release_date=request.POST['showreldate'], description=request.POST['showdesc'])
-        messages.success(request, f"{ request.POST['showtitle'] } created successfully!")
-        return redirect('showlist')
+        errors = Shows.objects.basic_validator(request.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value)
+            return redirect('newshow')
+        else:
+            Shows.objects.create(title=request.POST['showtitle'], network=request.POST['shownet'], release_date=request.POST['showreldate'], description=request.POST['showdesc'])
+            messages.success(request, f"{ request.POST['showtitle'] } created successfully!")
+            return redirect('showlist')
 
 def showlist(request):
     context = {
