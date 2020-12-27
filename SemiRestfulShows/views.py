@@ -81,3 +81,13 @@ def destroy(request, showid):
         byebye.delete()
         messages.success(request, f"{ byebye.title } deleted successfully from database.")
         return redirect('showlist')
+
+def title_check(request):
+    found = False
+    result = Shows.objects.filter(title=request.form['showtitle'])
+    if result:
+        found = True
+    context = {
+        "found" : found
+    }
+    return render(request, 'partials/titlecheck.html', context)
