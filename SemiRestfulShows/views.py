@@ -2,8 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Shows
 
-
-
 def newshow(request):
     if request.method == 'GET':
         context = {
